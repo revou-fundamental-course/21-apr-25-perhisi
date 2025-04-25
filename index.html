@@ -13,11 +13,90 @@
     <body>
         <!-- Header Content -->
         <header>
-            <h1>Website Konversi Suhu - Perhisi<</h1>
+            <h1>Website Konversi Suhu - Perhisi</h1>
         </header>
     
         <!-- Main Content -->
-        <main></main>
+        <main>
+
+            <!-- Introduction -->
+            <section>
+                <!-- Dummy Intro -->
+                <p>Masukkan suhu derajat Celcius (&deg;C) ke kotak dibawah, lalu klik tombol Konversi untuk mendapatkan hasil konversi dalam bentuk Fahrenheit (&deg;F). </p>
+
+            </section>
+
+            <!-- Form Konversi Suhu -->
+            <form class="section-content">
+                <div class="section-item">
+                    <label for="konversi-input">Celcius (&deg;C):</label>
+                </div>
+
+                <div class="section-item">
+                    <textarea id="konversi-input"></textarea>
+                </div>
+                <!-- Form Action -->
+                <div class="section-item">
+                    <button class="bg-1">Konversi</button>
+                    <button class="bg-2">Reset</button>
+                    <button class="bg-3">Reverse</button>
+                </div>
+
+            </form>
+
+            <!-- Hasil Konversi Suhu -->
+            <section class="section-content">
+                <div class="section-item">
+                    <label for="result-input">Fahrenheit (&deg;F):</label>
+                </div>
+
+                <div class="section-item">
+                    <textarea id="result-input" readonly></textarea>
+                </div>
+
+            </section>
+
+            <!-- Penjelasan -->
+            <section class="section-content">
+                <div class="section-item">
+                    <label for="calculate-detail">Cara Kalkulasi:</label>
+                </div>
+
+                <div class="section-item">
+                    <textarea id="calculate-detail" readonly></textarea>
+                </div>
+                <p>Fahrenheit to Celcius</p>
+            </section>
+
+            <!-- Informasi Tambahan -->
+            <section>
+                <header>
+                    <h1>Cara Konversi dari (&deg;Celcius) ke (&deg;Fahrenheit)</h1>
+                </header>
+                
+                <hr />
+                
+                <!-- Konten Informasi -->
+                <article>
+                    <p>
+                        Suhu <span class="formula">S</span> dalam derajat Fahrenheit (&deg;F) sama dengan suhu <span class="formula">S</span> dalam derajat Celcius (&deg;C) kali 9/5 tambah 32. 
+                    </p>
+
+                    <!-- Formula -->
+                    <div class="formula">
+                        S<sub>(&deg;F)</sub> = (S<sub>(&deg;C)</sub> x 9/5) + 32
+                    </div>
+
+                    <div>
+                        atau
+                    </div>
+
+                    <div class="formula">
+                        S<sub>(&deg;F)</sub> = (S<sub>(&deg;C)</sub> x 1,8) + 32
+                    </div>
+                </article>
+            </section>
+        </main>
     
         <!-- Footer -->
         <footer>2025 Perhisi.All right reserved</footer>
