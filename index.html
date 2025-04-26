@@ -8,15 +8,7 @@
 
     <!-- CSS External -->
     <link rel="stylesheet" href="css\style.css">
-    <style>
-        body {
-            background-color: aquamarine;
-            background-image: url("assets/img.png");
-            background-repeat: no-repeat;
-            background-position: right top;
-            background-size: 300px 300px;
-        }
-    </style>
+    
 </head>
 
 <body>     
@@ -39,10 +31,13 @@
             <form class="section-content">
                 <div class="section-item">
                     <label for="konversi-input">Celcius (&deg;C):</label>
+
                 </div>
 
                 <div class="section-item">
-                    <textarea id="konversi-input" autocomplete="cc-number"></textarea>
+                    <textarea id="konversi-input" type="text" required></textarea>
+                <!-- Add this inside your form or near the input fields -->
+                <div id="error-message" style="color: red; display: none;"></div>
                 </div>
                 <!-- Form Action -->
                 <div class="section-item">
@@ -80,7 +75,7 @@
             <!-- Informasi Tambahan -->
             <section>
                 <header>
-                    <h1>Cara Konversi dari (&deg;Celcius) ke (&deg;Fahrenheit)</h1>
+                    <h1>Cara Konversi dari Celcius (&deg;C) ke Fahrenheit (&deg;F)</h1>
                 </header>
                 
                 <hr />
@@ -113,8 +108,5 @@
         </footer>
         <!-- Javascript -->
         <script src="js\script.js"></script>
-    </body>
-    
-    </html>
 </body>
 </html>
