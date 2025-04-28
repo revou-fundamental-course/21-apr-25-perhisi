@@ -1,20 +1,16 @@
-
-// filepath: c:\Users\zein\Documents\RevoU\21-apr-25-perhisi\js\script.js
-
-// Function to display error messages
+// Error Handling Functions
 function showError(message) {
     const errorElement = document.getElementById('error-message');
     errorElement.textContent = message;
     errorElement.style.display = 'block';
 }
 
-// Function to clear error messages
 function clearError() {
     const errorElement = document.getElementById('error-message');
     errorElement.style.display = 'none';
 }
 
-// Function to validate input
+// Input Validation Function
 function validateInput(input, type) {
     if (input.trim() === '') {
         showError(`Masukkan suhu dalam ${type}!`);
@@ -22,7 +18,7 @@ function validateInput(input, type) {
     }
 
     if (isNaN(input)) {
-        showError('Masukkan angka yang valid!');
+        showError(`Masukkan angka yang valid untuk suhu dalam ${type}!`);
         return false;
     }
 
@@ -30,22 +26,48 @@ function validateInput(input, type) {
     return true;
 }
 
-// Function to convert Celsius to Fahrenheit
-function convertTemperature() {
-    const celsiusInput = document.getElementById('konversi-input').value;
-    const fahrenheitOutput = document.getElementById('result-input');
-    const calculationDetail = document.getElementById('calculate-detail');
+// Conversion Logic
+function performConversion(input, isCelsiusToFahrenheit) {
+    const inputValue = parseFloat(input);
+    let result, formula;
 
-    if (!validateInput(celsiusInput, 'Celcius')) return;
+    if (isCelsiusToFahrenheit) {
+        result = (inputValue * 9 / 5) + 32;
+        formula = `${inputValue}°C x 9/5 + 32 = ${result.toFixed(2)}°F`;
+    } else {
+        result = (inputValue - 32) * 5 / 9;
+        formula = `(${inputValue}°F - 32) x 5/9 = ${result.toFixed(2)}°C`;
+    }
 
-    const celsius = parseFloat(celsiusInput);
-    const fahrenheit = (celsius * 9 / 5) + 32;
-
-    fahrenheitOutput.value = fahrenheit.toFixed(2);
-    calculationDetail.value = `${celsius}°C x 9/5 + 32 = ${fahrenheit.toFixed(2)}°F`;
+    return { result: result.toFixed(2), formula };
 }
 
-// Function to reset the form
+// Conversion Function
+function convertTemperature(isCelsiusToFahrenheit) {
+    clearError();
+
+    const inputField = document.getElementById('konversi-input');
+    const outputField = document.getElementById('result-input');
+    const calculationDetail = document.getElementById('calculate-detail');
+
+    const inputType = isCelsiusToFahrenheit ? 'Celcius' : 'Fahrenheit';
+    const outputType = isCelsiusToFahrenheit ? 'Fahrenheit' : 'Celcius';
+
+    const inputValue = inputField.value;
+
+    if (!validateInput(inputValue, inputType)) return;
+
+    const { result, formula } = performConversion(inputValue, isCelsiusToFahrenheit);
+
+    outputField.value = result;
+    calculationDetail.value = formula;
+
+    // Update labels dynamically
+    document.getElementById('input-label').textContent = `${inputType} (°${inputType[0]}):`;
+    document.getElementById('output-label').textContent = `${outputType} (°${outputType[0]}):`;
+}
+
+// Reset Function
 function resetForm() {
     document.getElementById('konversi-input').value = '';
     document.getElementById('result-input').value = '';
@@ -53,25 +75,11 @@ function resetForm() {
     clearError();
 }
 
-// Function to reverse the conversion (Fahrenheit to Celsius)
-function reverseConversion() {
-    const fahrenheitInput = document.getElementById('konversi-input').value;
-    const celsiusOutput = document.getElementById('result-input');
-    const calculationDetail = document.getElementById('calculate-detail');
-
-    if (!validateInput(fahrenheitInput, 'Fahrenheit')) return;
-
-    const fahrenheit = parseFloat(fahrenheitInput);
-    const celsius = (fahrenheit - 32) * 5 / 9;
-
-    celsiusOutput.value = celsius.toFixed(2);
-    calculationDetail.value = `(${fahrenheit}°F - 32) x 5/9 = ${celsius.toFixed(2)}°C`;
-}
-
-// Event Listeners for Buttons
+// Event Listeners
 document.querySelector('.bg-1').addEventListener('click', (e) => {
     e.preventDefault();
-    convertTemperature();
+    const isCelsiusToFahrenheit = document.getElementById('input-label').textContent.includes('Celcius');
+    convertTemperature(isCelsiusToFahrenheit);
 });
 
 document.querySelector('.bg-2').addEventListener('click', (e) => {
@@ -81,5 +89,6 @@ document.querySelector('.bg-2').addEventListener('click', (e) => {
 
 document.querySelector('.bg-3').addEventListener('click', (e) => {
     e.preventDefault();
-    reverseConversion();
+    const isCelsiusToFahrenheit = !document.getElementById('input-label').textContent.includes('Celcius');
+    convertTemperature(isCelsiusToFahrenheit);
 });
