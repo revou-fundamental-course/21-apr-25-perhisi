@@ -32,14 +32,22 @@ function performConversion(input, isCelsiusToFahrenheit) {
     let result, formula;
 
     if (isCelsiusToFahrenheit) {
+        // Celsius to Fahrenheit formula
         result = (inputValue * 9 / 5) + 32;
         formula = `${inputValue}°C x 9/5 + 32 = ${result.toFixed(2)}°F`;
     } else {
+        // Fahrenheit to Celsius formula
         result = (inputValue - 32) * 5 / 9;
         formula = `(${inputValue}°F - 32) x 5/9 = ${result.toFixed(2)}°C`;
     }
 
     return { result: result.toFixed(2), formula };
+}
+
+// Update Labels Function
+function updateLabels(inputType, outputType) {
+    document.getElementById('input-label').textContent = `${inputType} (°${inputType[0]}):`;
+    document.getElementById('output-label').textContent = `${outputType} (°${outputType[0]}):`;
 }
 
 // Conversion Function
@@ -63,8 +71,7 @@ function convertTemperature(isCelsiusToFahrenheit) {
     calculationDetail.value = formula;
 
     // Update labels dynamically
-    document.getElementById('input-label').textContent = `${inputType} (°${inputType[0]}):`;
-    document.getElementById('output-label').textContent = `${outputType} (°${outputType[0]}):`;
+    updateLabels(inputType, outputType);
 }
 
 // Reset Function
